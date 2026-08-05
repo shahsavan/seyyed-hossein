@@ -6,7 +6,6 @@
   --color-hl: #0ea5e9;
   --color-border: #e6e9ee;
   --color-header-bg: rgba(255, 255, 255, 0.9);
-  --color-portrait-bg: var(--color-bg-alt);
   --max-width: 1080px;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
@@ -19,7 +18,6 @@
   --color-hl: #38bdf8;
   --color-border: #262b38;
   --color-header-bg: rgba(15, 17, 23, 0.85);
-  --color-portrait-bg: var(--color-bg-alt);
 }
 
 * {
@@ -89,6 +87,12 @@ section {
   font-size: 1.05rem;
 }
 
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
 .header__nav {
   display: flex;
   gap: 1.75rem;
@@ -117,6 +121,71 @@ section {
   width: 22px;
   height: 2px;
   background: var(--color-fg);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+  cursor: pointer;
+  padding: 0;
+}
+
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-hl);
+  transition: transform 0.25s ease;
+}
+
+:root[data-theme="dark"] .theme-toggle::before {
+  transform: translateX(18px);
+}
+
+.theme-toggle__icon {
+  position: absolute;
+  top: 50%;
+  width: 13px;
+  height: 13px;
+  transform: translateY(-50%);
+  transition: opacity 0.2s ease;
+}
+
+.theme-toggle__icon--sun {
+  left: 4px;
+  color: #fff;
+  opacity: 1;
+}
+
+.theme-toggle__icon--moon {
+  right: 4px;
+  color: var(--color-fg-muted);
+  opacity: 0.6;
+}
+
+:root[data-theme="dark"] .theme-toggle__icon--sun {
+  color: var(--color-fg-muted);
+  opacity: 0.6;
+}
+
+:root[data-theme="dark"] .theme-toggle__icon--moon {
+  color: #0f1117;
+  opacity: 1;
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--color-hl);
+  outline-offset: 2px;
 }
 
 @media (max-width: 720px) {
