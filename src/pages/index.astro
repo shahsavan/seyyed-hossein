@@ -1,0 +1,236 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import portrait from "../assets/personal-photo.png";
+
+const skills = [
+  { label: "Simulation & CFD Tools", value: "ANSYS Fluent (Advanced), ANSYS Mechanical, ANSYS Meshing, ICEM CFD, CFD-Post, Tecplot, FSI Simulation" },
+  { label: "CAD & Modeling", value: "SOLIDWORKS, ANSYS DesignModeler" },
+  { label: "Programming & Scripting", value: "MATLAB, Python (working knowledge), C++, ANSYS Fluent UDF development" },
+  { label: "Experimental Methods", value: "Micro-PIV measurements, 3D printing & prototype fabrication" },
+  { label: "Documentation", value: "Technical report writing, conference presentations, data visualization" },
+  { label: "Languages", value: "English (C1), German (A2, currently improving), Italian (A1)" },
+];
+
+const education = [
+  { degree: "Master of Science in Biomedical Engineering", school: "Politecnico di Milano, Milan, Italy", meta: "2018 – 2021 · GPA 99/110" },
+  { degree: "Bachelor of Science in Mechanical Engineering", school: "University of Tehran, Tehran, Iran", meta: "2013 – 2017 · GPA 3.88/4" },
+];
+
+const experience = [
+  {
+    role: "Project Assistant — CFD Modeling & Optimization",
+    org: "TU Wien, Vienna",
+    dates: "08/2022 – 02/2026",
+    summary: "Led a work package in the EU-funded BioMembROS project (European Innovation Council), simulating and optimizing hollow fiber membrane oxygenators with an international consortium.",
+    points: [
+      "Developed the first CFD implementation of a physiologically informed gas transfer model for membrane oxygenators, achieving average prediction errors of 2.5% for O₂ and 10% for CO₂ — roughly 2× more accurate than existing models.",
+      "Developed a metaheuristic algorithm, Modified Enhanced Jaya, to fit complex nonlinear simulation data with over 95% accuracy.",
+      "Coupled MATLAB with ANSYS Fluent to automate 250 CFD simulation cases, applying Pareto-based multi-objective optimization to identify optimal hollow fiber arrangements.",
+      "Conducted a DoE-based parametric CFD study across 48 fiber cross-section geometries, increasing mass transfer by ~20% while maintaining acceptable blood damage levels.",
+      "Validated CFD models against micro-PIV experimental measurements, achieving over 90% agreement in flow patterns and velocity magnitudes.",
+    ],
+  },
+  {
+    role: "CFD Engineer — Cardiovascular Flow & Pump Simulation",
+    org: "Medrik Dynamic Technology (collaboration with FineHeart), Remote",
+    dates: "01/2019 – 01/2021",
+    summary: "Developed patient-specific CFD models of implantable cardiac pump systems to evaluate hemodynamic performance, flow behavior, and thrombosis risk across multiple pump designs.",
+    points: [
+      "Reconstructed patient-specific left ventricle geometry from MRI images and implemented custom UDFs in ANSYS Fluent for physiologically accurate dynamic mesh motion.",
+      "Simulated 6 implantable pump configurations under 3 rotational speed profiles (3,000–6,000 rpm), evaluating wall shear stress and thrombosis risk.",
+      "Optimized pump casing geometry, eliminating near-zero velocity regions and substantially reducing thrombosis risk.",
+      "Achieved flow rates up to 2.8 L/min at 6,000 rpm, with results validated against FineHeart's PIV experimental measurements.",
+    ],
+  },
+  {
+    role: "CFD Engineer — Hydrofoil & Turbine Optimization",
+    org: "Independent Project · University of Tehran, Tehran, Iran",
+    dates: "12/2017 – 08/2018",
+    summary: "Developed a fully automated simulation framework for hydrofoil optimization in marine current turbines, integrating parametric geometry generation, CFD analysis, and uncertainty quantification.",
+    points: [
+      "Parameterized hydrofoil geometries using Bézier curves with 13 control points and a custom Genetic Algorithm in MATLAB.",
+      "Built a fully automated geometry-to-results pipeline (MATLAB, ANSYS DesignModeler, ICEM CFD, ANSYS CFX) evaluating 1,000+ hydrofoil configurations.",
+      "Integrated lift/drag results with Blade Element Momentum theory to estimate turbine power and torque.",
+      "Connected the framework to an uncertainty quantification pipeline for robust design evaluation.",
+    ],
+  },
+];
+
+const projects = [
+  {
+    title: "Hollow Fiber Membrane Oxygenator CFD",
+    description: "A physiologically informed gas transfer model for membrane oxygenators, combined with multi-objective optimization across 48 fiber geometries — improving mass transfer by ~20% while keeping blood damage low.",
+    tags: ["ANSYS Fluent", "MATLAB", "Multi-objective optimization", "Micro-PIV validation"],
+  },
+  {
+    title: "Implantable Cardiac Pump Simulation",
+    description: "Patient-specific CFD models of implantable cardiac pumps reconstructed from MRI data, used to reduce thrombosis risk and improve apex-washing performance across pump designs.",
+    tags: ["Dynamic mesh", "UDF development", "Hemodynamics", "PIV validation"],
+  },
+  {
+    title: "Hydrofoil & Marine Turbine Optimization",
+    description: "Fully automated geometry-to-results pipeline evaluating 1,000+ hydrofoil configurations, coupling a custom Genetic Algorithm with CFD and uncertainty quantification.",
+    tags: ["Genetic Algorithm", "ANSYS CFX", "XFOIL", "Uncertainty quantification"],
+  },
+];
+
+const papers = [
+  {
+    title: "A Validated CFD Model for Gas Exchange in Hollow Fiber Membrane Oxygenators: Incorporating the Bohr and Haldane Effects",
+    meta: "First Author · Membranes, 2025",
+    doi: "10.3390/membranes15090268",
+  },
+  {
+    title: "Optimizing Hollow Fiber Membrane Oxygenators: A Multi-Objective Approach for Improved Gas Exchange and Reduced Blood Damage",
+    meta: "First Author · Journal of Membrane Science, 2025",
+    doi: "10.1016/j.memsci.2025.124228",
+  },
+  {
+    title: "Effects of Pulsatile Bi-level Ventilation on Flow Characteristics in an Alveolated Duct: A Comparative Study",
+    meta: "Second Author · Computers in Biology and Medicine, 2025",
+    doi: "10.1016/j.compbiomed.2025.110509",
+  },
+];
+
+const honors = [
+  { badge: "Journal Cover Feature", detail: "Membranes, September 2025 — first-author paper selected as the cover article." },
+  { badge: "Best Junior Presentation Award", detail: "ESB Meeting, TU Wien, May 2024 — ANC-ESB Annual Meeting, for CFD-based research on oxygen transport in membrane oxygenators." },
+];
+---
+
+<Layout
+  title="Seyyed Hossein Monsefi — Computational Fluid Dynamics & Modeling Expert"
+  description="Personal site of Seyyed Hossein Monsefi, CFD and modeling expert with 7+ years of experience in fluid dynamics simulation, turbulence modeling, and heat and mass transfer."
+>
+  <section id="top" class="hero">
+    <div class="hero__text" data-reveal>
+      <span class="hero__eyebrow">Computational Fluid Dynamics &amp; Modeling Expert</span>
+      <h1>Seyyed Hossein Monsefi, MSc</h1>
+      <p>
+        CFD engineer with 7+ years of experience in fluid dynamics simulations, turbulence
+        modeling, and heat and mass transfer — delivering simulation-driven design improvements
+        validated against experimental data at over 90% accuracy.
+      </p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="/seyyed-hossein-monsefi-cv.pdf" target="_blank" rel="noopener">Download CV</a>
+        <a class="btn btn--ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero__portrait" data-reveal>
+      <Image
+        src={portrait}
+        alt="Seyyed Hossein Monsefi"
+        width={320}
+        height={320}
+        loading="eager"
+        fetchpriority="high"
+        style="object-fit: cover; width: 100%; height: 100%;"
+      />
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-heading" data-reveal>
+      <h2>About me</h2>
+      <p>
+        Author of 3 peer-reviewed publications and recipient of the Best Junior Presentation
+        Award at ESB 2024. Specialized in ANSYS Fluent, RANS/LES turbulence modeling, dynamic
+        mesh, UDF development, simulation automation, and CFD-based geometry optimization.
+      </p>
+    </div>
+    <div class="about__grid">
+      <ul class="skills-list" data-reveal>
+        {skills.map((s) => (
+          <li>
+            <strong>{s.label}</strong>
+            <span>{s.value}</span>
+          </li>
+        ))}
+      </ul>
+      <ul class="education-list" data-reveal>
+        {education.map((e) => (
+          <li>
+            <h3>{e.degree}</h3>
+            <div class="meta">{e.school}</div>
+            <div class="meta">{e.meta}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="section-heading" data-reveal>
+      <h2>Experiences</h2>
+      <p>A track record of simulation-driven design improvements across biomedical, energy, and industrial fluid systems.</p>
+    </div>
+    <ul class="timeline">
+      {experience.map((job) => (
+        <li class="timeline__item" data-reveal>
+          <h3>{job.role}</h3>
+          <div class="timeline__meta">{job.org} · {job.dates}</div>
+          <p>{job.summary}</p>
+          <ul>
+            {job.points.map((point) => <li>{point}</li>)}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="projects">
+    <div class="section-heading" data-reveal>
+      <h2>Projects</h2>
+      <p>Flagship simulation projects spanning biomedical devices and renewable energy systems.</p>
+    </div>
+    {projects.map((project, i) => (
+      <div class={`project-card ${i % 2 === 1 ? "project-card--reverse" : ""}`} data-reveal>
+        <div class="project-card__media">{project.title}</div>
+        <div class="project-card__content">
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+          <div class="project-card__tags">
+            {project.tags.map((tag) => <span class="tag">{tag}</span>)}
+          </div>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <section id="papers">
+    <div class="section-heading" data-reveal>
+      <h2>Papers</h2>
+      <p>Peer-reviewed publications in fluid dynamics and biomedical engineering.</p>
+    </div>
+    <ul class="papers-list" data-reveal>
+      {papers.map((paper) => (
+        <li class="paper">
+          <span class="paper__title">{paper.title}</span>
+          <span class="paper__meta">{paper.meta}</span>
+          <a class="paper__link" href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener">DOI ↗</a>
+        </li>
+      ))}
+    </ul>
+    <div class="honors" data-reveal>
+      {honors.map((honor) => (
+        <div class="honor">
+          <span class="honor__badge">{honor.badge}</span>
+          <span>— {honor.detail}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-heading" data-reveal>
+      <h2>Contact</h2>
+      <p>Based in Vienna, Austria. Open to CFD and simulation engineering opportunities.</p>
+    </div>
+    <div class="contact__grid" data-reveal>
+      <div><a href="mailto:hosseinmonsefi@gmail.com">hosseinmonsefi@gmail.com</a></div>
+      <div><a href="tel:+436601795860">+43 660 1795860</a></div>
+      <div>Am Langen Felde 46/31, 1220, Vienna, Austria</div>
+    </div>
+  </section>
+</Layout>
